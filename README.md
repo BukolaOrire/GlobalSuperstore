@@ -31,3 +31,101 @@ EDA involved exploring the data to answer key questions;
 - Which product subcategory has the highest average profit in Australia?
 - Who are the most valuable customers and what do they purchase?
 
+## Data Modelling
+```sql
+SELECT * FROM GlobalSuperstore
+
+ --Data cleaning
+ALTER TABLE Globalsuperstore
+DROP COLUMN Postal_code
+
+--TOP 3 countries with the highest total profit in 2014
+ SELECT TOP 3 country,SUM(profit) AS total_profit
+ FROM GlobalSuperstore
+ WHERE Order_Date BETWEEN 
+      '2014-01-01' AND '2014-12-31'
+ GROUP BY country
+ ORDER BY 2 DESC
+
+ --Products with the highest sales in the United States
+ SELECT TOP 3 Product_Name,SUM(profit) AS US_totalprofit
+ FROM GlobalSuperstore
+ WHERE country ='United States'AND
+     Order_Date BETWEEN  '2014-01-01' AND '2014-12-31'
+ GROUP BY Product_Name
+ ORDER BY 2 DESC
+ 
+ --Products with the highest sales in India
+ SELECT TOP 3 Product_Name,SUM(profit) AS India_totalprofit
+ FROM GlobalSuperstore
+ WHERE country ='India'AND
+       Order_Date BETWEEN  '2014-01-01' AND '2014-12-31'
+ GROUP BY  Product_Name
+ ORDER BY 2 DESC
+
+ --Products with the highest sales in China
+ SELECT TOP 3 Product_Name,SUM(profit) AS China_totalprofit
+ FROM GlobalSuperstore
+ WHERE country ='China' AND
+      Order_Date BETWEEN  '2014-01-01' AND '2014-12-31'
+ GROUP BY Product_Name
+ ORDER BY 2 DESC
+ 
+ -- Subcategories with the highest average shipping cost in the US
+SELECT TOP 3 Sub_category,AVG(shipping_cost) AS US_Avgshippingcost
+FROM GlobalSuperstore
+WHERE Country ='United States'
+GROUP BY Sub_Category
+ORDER BY 2 DESC
+
+--Analyzing Nigeria's profitability in 2014,and compare to other Africa countries
+CREATE VIEW Africa_Profitablity2014 AS
+SELECT TOP 40 Country,AVG(Discount) AS Avg_Discount
+                     ,SUM(Quantity) AS Total_QuantityOrder
+                     ,SUM(Profit) AS total_profit
+					 ,AVG(Shipping_Cost) AS Avg_Shipmentcost 
+FROM Globalsuperstore
+WHERE region ='Africa' AND 
+    Order_date BETWEEN '2014-01-01' AND '2014-12-31'
+GROUP BY Country
+ORDER BY 4 ASC
+
+SELECT * FROM Africa_Profitablity2014 
+
+--Identifying the least profitably product subcategory in Southeast Asia
+SELECT Sub_category
+      ,SUM(Profit) AS Least_profit         
+FROM GlobalSuperstore
+WHERE region ='Southeast Asia' 
+GROUP BY Sub_category
+ORDER BY 2 ASC
+
+--City with the least average profit in the United States
+--and why is the average profit low
+SELECT City,AVG(Profit) AS Avg_profit, 
+           COUNT(DISTINCT Order_ID) AS Order_count
+ FROM GlobalSuperstore
+ WHERE Country LIKE '%states' 
+GROUP BY City
+HAVING COUNT(DISTINCT Order_ID) >= '10'
+ORDER BY 2 ASC
+
+--Product Subcategory with the highest average profit in Austrialia
+SELECT Sub_Category,AVG(Profit) AS Avg_profit
+      FROM GlobalSuperstore
+	  WHERE Region = 'Oceania'
+GROUP BY Sub_Category
+ORDER BY 2 DESC
+
+--The most valuable customers and what they purchase
+CREATE VIEW
+Valuable_Customers AS
+SELECT TOP 10 Customer_name,Category
+     ,SUM(Sales) AS TotalAmountSpent
+     ,SUM(Profit) AS Margin
+	 ,SUM(quantity) AS Orders
+      FROM GlobalSuperstore
+GROUP BY Customer_name,Category
+ORDER BY 4 DESC
+```
+
