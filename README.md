@@ -49,6 +49,13 @@ EDA involved exploring the data to answer key questions;
   
 - Who are the most valuable customers and what do they purchase?
 
+
+  ![global superstore dashboard](https://github.com/BukolaOrire/GlobalSuperstore/assets/161165047/95e55f90-ba67-42a8-930a-fd71e9a83770)
+
+
+
+
+
 ## Data Modelling
 ```sql
 SELECT * FROM GlobalSuperstore
