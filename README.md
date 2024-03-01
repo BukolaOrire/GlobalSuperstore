@@ -16,7 +16,10 @@ clientele,hailing from 147 different countries, can browse through an endless of
 **_Disclaimer_**: _All datasets and reportd do not represent any company, institution or country, but just a dummy dataset to demonstrate capabilities of Sql._**
 
 ## Data Source
-The dataset used for this analysis is in csv format  [download here](https://docs.google.com/spreadsheets/d/1nxESpFzWjlGDMGDVLH69xmDzIl9l6OEq/edit#gid=633280281) This data set was provided by Digitalleydrive as part of my capstone project.
+The dataset used for this analysis is in csv format  [download here](https://docs.google.com/spreadsheets/d/1nxESpFzWjlGDMGDVLH69xmDzIl9l6OEq/edit#gid=633280281) This data set was provided by Digitalleydrive as part of my capstone project. The dataset consists of the following tables below;
+- Orders made of up of 51,290 rows and 24 columns
+- Returns made up of 1173 rows and 3 columns
+- Persons made up of 13 rows and 2 columns
 
 ## Tools Used for Analysis
 -  SQL Server for  Data Cleaning and Exploratory Data Analysis
